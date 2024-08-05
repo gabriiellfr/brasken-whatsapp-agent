@@ -1,0 +1,12 @@
+@ -0,0 +1,10 @@
+
+/.wwebjs_auth
+/.wwebjs_auth
+.DS_Store
+.gitattributes
+/.wwebjs_cache
+/node_modules
+/old
+package-lock.json
+/uploads
+db/brasken-db.json

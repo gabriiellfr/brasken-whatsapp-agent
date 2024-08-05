@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Database</title>
+  <link rel="stylesheet" href="upload.css">
+</head>
+<body>
+  <header>
+
+    <form id="upload-form" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".xlsx" required>
+      <button type="submit">Upload</button>
+    </form>
+  </header>
+
+  <div class="container">
+    <div class="table-container">
+      <table id="data-table">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('upload-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(this);
+
+      fetch('/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Clear previous table data
+        const tableHead = document.querySelector('#data-table thead');
+        const tableBody = document.querySelector('#data-table tbody');
+        tableHead.innerHTML = '';
+        tableBody.innerHTML = '';
+
+        // Generate table headers
+        const headers = Object.keys(data[0] || {});
+        const headerRow = document.createElement('tr');
+        headers.forEach(header => {
+          const th = document.createElement('th');
+          th.textContent = header;
+          headerRow.appendChild(th);
+        });
+        tableHead.appendChild(headerRow);
+
+        // Generate table rows
+        data.forEach(row => {
+          const tableRow = document.createElement('tr');
+          headers.forEach(header => {
+            const td = document.createElement('td');
+            td.textContent = row[header] || '';
+            tableRow.appendChild(td);
+          });
+          tableBody.appendChild(tableRow);
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
+</body>
+</html>

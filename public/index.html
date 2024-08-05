@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Agent</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WhatsApp Agent</h1>
+        <div id="info-container" class="info-container">Checking session...</div>
+        <div id="qr-container" class="qr-container"></div>
+        <div id="status-container" class="status-container"></div>
+        <div id="toggle-container" class="toggle-container">
+            <label for="toggle-agent">Agent Active:</label>
+            <input type="checkbox" id="toggle-agent">
+        </div>
+        </br>
+        <button onclick="window.location.href='/upload.html'">Upload Database</button>
+    </div>
+    <script>
+        let ws;
+        let reconnectInterval = 2000; // Interval to attempt reconnection (in milliseconds)
+
+        const infoContainer = document.getElementById('info-container');
+        const qrContainer = document.getElementById('qr-container');
+        const statusContainer = document.getElementById('status-container');
+
+        function connectWebSocket() {
+            ws = new WebSocket('ws://localhost:3000/qr');
+
+            ws.onopen = () => {
+                console.log('WebSocket connection opened');
+                infoContainer.textContent = 'Checking session...';
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                console.log('Message received:', data);
+
+                if (data.qr) {
+                    qrContainer.innerHTML = '<img src="' + data.qr + '" alt="QR Code">';
+                    infoContainer.textContent = 'Please scan the QR code to authenticate.';
+                }
+
+                if (data.status) {
+                    if (data.status === 'connected') {
+                        qrContainer.innerHTML = ''; // Clear the QR code
+                        infoContainer.textContent = 'You are successfully connected!';
+                    } else if (data.status === 'waiting') {
+                        infoContainer.textContent = 'Waiting for QR code scan...';
+                    } else if (data.status === 'authenticated') {
+                        infoContainer.textContent = 'You have been authenticated successfully!';
+                    } else if (data.status === 'auth_failure') {
+                        infoContainer.textContent = 'Authentication failed. Please try again.';
+                    } else {
+                        infoContainer.textContent = 'Waiting for connection...';
+                    }
+                }
+                
+                if (data.agentEnabled !== undefined) {
+                    document.getElementById('toggle-agent').checked = data.agentEnabled;
+                }
+            };
+
+            ws.onclose = () => {
+                infoContainer.textContent = 'Connection lost. Reconnecting...';
+                setTimeout(connectWebSocket, reconnectInterval);
+            };
+
+            ws.onerror = (error) => {
+                infoContainer.textContent = 'An error occurred: ' + error.message;
+            };
+        }
+
+        document.getElementById('toggle-agent').addEventListener('change', (event) => {
+            fetch('/toggle-agent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ active: event.target.checked })
+            });
+        });
+
+        connectWebSocket();
+    </script>
+</body>
+</html>
