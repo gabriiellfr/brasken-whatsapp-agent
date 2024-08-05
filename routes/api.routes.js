@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 
 const { writeConfig } = require('../utils/update.config');
+const { readDatabase } = require('../utils/database.config');
 
 const router = express.Router();
 
@@ -56,8 +57,14 @@ const saveJsonToFile = (formattedData) => {
     }
 };
 
+router.get('/get-database', (req, res) => {
+    const database = readDatabase();
+
+    res.json(database);
+});
+
 // Handle file upload and conversion
-router.post('/upload', upload.single('file'), (req, res) => {
+router.post('/upload-data', upload.single('file'), (req, res) => {
     const file = req.file;
 
     if (!file) {
@@ -107,23 +114,14 @@ router.post('/upload', upload.single('file'), (req, res) => {
 
     saveJsonToFile(formattedData);
 
-    console.log(formattedData);
-
     res.json(formattedData);
 });
 
 router.post('/toggle-agent', (req, res) => {
-    const { active } = req.body;
+    const { agentEnabled } = req.body;
 
-    if (typeof active !== 'boolean')
-        return res.status(400).json({ error: 'Invalid value for active.' });
-
-    console.log(active);
-
-    const agentEnabled = { agentEnabled: active };
-    writeConfig(agentEnabled);
-
-    res.status(200).json({ success: true, botActive: active });
+    writeConfig({ agentEnabled });
+    res.json({ success: true, agentEnabled });
 });
 
 module.exports = router;

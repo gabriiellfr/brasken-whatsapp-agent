@@ -79,7 +79,7 @@
             fetch('/toggle-agent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ active: event.target.checked })
+                body: JSON.stringify({ agentEnabled: event.target.checked })
             });
         });
 
