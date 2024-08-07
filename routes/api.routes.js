@@ -6,7 +6,7 @@ const XLSX = require('xlsx');
 const path = require('path');
 const fs = require('fs');
 
-const { writeConfig } = require('../utils/update.config');
+const { writeConfig, readConfig } = require('../utils/update.config');
 const { readDatabase } = require('../utils/database.config');
 
 const router = express.Router();
@@ -61,6 +61,12 @@ router.get('/get-database', (req, res) => {
     const database = readDatabase();
 
     res.json(database);
+});
+
+router.get('/get-config', (req, res) => {
+    const config = readConfig();
+
+    res.json(config);
 });
 
 // Handle file upload and conversion

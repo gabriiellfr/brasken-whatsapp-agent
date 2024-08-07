@@ -1,0 +1,52 @@
+2024-08-05T23:34:39.967Z - Server running at http://localhost:3000
+2024-08-05T23:35:00.727Z - Server running at http://localhost:3000
+2024-08-05T23:36:49.019Z - Server running at http://localhost:3000
+2024-08-05T23:36:58.182Z - Server running at http://localhost:3000
+2024-08-05T23:38:47.316Z - Server running at http://localhost:3000
+2024-08-05T23:39:00.405Z - Authenticated!
+2024-08-05T23:39:04.746Z - Client is ready!
+2024-08-05T23:39:33.909Z - Server running at http://localhost:3000
+2024-08-05T23:39:34.916Z - WebSocket connection upgraded
+2024-08-05T23:39:34.918Z - WebSocket connection established
+2024-08-05T23:39:50.220Z - Authenticated!
+2024-08-05T23:39:53.841Z - Client is ready!
+2024-08-05T23:40:00.500Z - Server running at http://localhost:3000
+2024-08-05T23:40:01.929Z - WebSocket connection upgraded
+2024-08-05T23:40:01.930Z - WebSocket connection established
+2024-08-05T23:40:12.222Z - WebSocket sending message to clients: [object Object]
+2024-08-05T23:40:12.222Z - Authenticated!
+2024-08-05T23:40:14.440Z - Client is ready!
+2024-08-05T23:40:14.440Z - WebSocket sending message to clients: [object Object]
+2024-08-05T23:41:08.973Z - WebSocket connection upgraded
+2024-08-05T23:41:08.973Z - WebSocket connection established
+2024-08-05T23:41:57.072Z - WebSocket connection upgraded
+2024-08-05T23:41:57.072Z - WebSocket connection established
+2024-08-05T23:43:07.206Z - Server running at http://localhost:3000
+2024-08-05T23:43:07.961Z - WebSocket connection upgraded
+2024-08-05T23:43:07.963Z - WebSocket connection established
+2024-08-05T23:43:20.380Z - Authenticated!
+2024-08-05T23:43:20.380Z - WebSocket sending message to clients: [object Object]
+2024-08-05T23:43:26.071Z - Client is ready!
+2024-08-05T23:43:26.072Z - WebSocket sending message to clients: [object Object]
+2024-08-05T23:44:32.684Z - Server running at http://localhost:3000
+2024-08-05T23:44:33.921Z - WebSocket connection established
+2024-08-05T23:44:33.918Z - WebSocket connection upgraded
+2024-08-05T23:44:49.095Z - Authenticated!
+2024-08-05T23:44:49.096Z - WebSocket sending message to clients: [object Object]
+2024-08-05T23:44:53.193Z - Client is ready!
+2024-08-05T23:44:53.193Z - WebSocket sending message to clients: [object Object]
+2024-08-05T23:44:56.181Z - Server running at http://localhost:3000
+2024-08-05T23:44:57.923Z - WebSocket connection upgraded
+2024-08-05T23:44:57.924Z - WebSocket connection established
+2024-08-05T23:45:07.695Z - Authenticated!
+2024-08-05T23:45:07.695Z - WebSocket sending message to clients: [object Object]
+2024-08-05T23:45:11.847Z - Client is ready!
+2024-08-05T23:45:11.848Z - WebSocket sending message to clients: [object Object]
+2024-08-05T23:46:44.311Z - WebSocket connection upgraded
+2024-08-05T23:46:44.312Z - WebSocket connection established
+2024-08-05T23:47:06.928Z - WebSocket connection upgraded
+2024-08-05T23:47:06.928Z - WebSocket connection established
+2024-08-06T02:38:03.695Z - WebSocket connection upgraded
+2024-08-06T02:38:04.359Z - WebSocket connection established
+2024-08-06T18:13:43.267Z - WebSocket connection upgraded
+2024-08-06T18:13:43.268Z - WebSocket connection established

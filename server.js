@@ -1,13 +1,15 @@
-//server.js
-
 const express = require('express');
 const path = require('path');
+const http = require('http');
 
 const { initializeBot } = require('./whatsapp.agent');
+const { setupWebSocket } = require('./services/socket.service');
+const log = require('./utils/logger.util');
+
 const apiRoutes = require('./routes/api.routes');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -19,16 +21,14 @@ app.use(express.json());
 // Use API routes
 app.use('/', apiRoutes);
 
-// Initialize WhatsApp bot and WebSocket server
-const wsServer = initializeBot();
+// Initialize WhatsApp bot
+initializeBot();
 
-// Integrate WebSocket with the HTTP server
-const server = app.listen(port, () => {
+// Create HTTP server and integrate WebSocket server
+const server = http.createServer(app);
+setupWebSocket(server);
+
+server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
-});
-
-server.on('upgrade', (request, socket, head) => {
-    wsServer.handleUpgrade(request, socket, head, (ws) => {
-        wsServer.emit('connection', ws, request);
-    });
+    log(`Server running at http://localhost:${port}`);
 });
