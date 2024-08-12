@@ -20,16 +20,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Use API routes
 app.use('/', apiRoutes);
 
-// Initialize WhatsApp bot
-initializeBot();
+const startServer = async () => {
+    try {
+        // Initialize WhatsApp bot
+        const botClient = await initializeBot();
 
-// Create HTTP server and integrate WebSocket server
-const server = http.createServer(app);
-setupWebSocket(server);
+        // Create HTTP server and integrate WebSocket server
+        const server = http.createServer(app);
+        setupWebSocket(server, botClient);
 
-server.listen(port, () => {
-    logger(`Server running at http://localhost:${port}`);
-});
+        server.listen(port, () => {
+            logger(`Server running at http://localhost:${port}`);
+        });
+    } catch (error) {
+        logger(`Error starting server: ${error}`);
+    }
+};
+
+// Start the server
+startServer();

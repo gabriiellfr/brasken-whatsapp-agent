@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const logger = require('./logger.util');
 
 const configPath = path.join(__dirname, '..', 'config', 'settings.json');
 
@@ -16,6 +17,9 @@ const readConfig = () => {
 const writeConfig = (newData) => {
     const currentData = readConfig();
     const updatedData = { ...currentData, ...newData };
+
+    logger(`Agent status changed: ${newData.agentEnabled}`);
+
     fs.writeFileSync(configPath, JSON.stringify(updatedData, null, 2));
 };
 

@@ -52,7 +52,8 @@
                     } else if (data.status === 'waiting') {
                         infoContainer.textContent = 'Waiting for QR code scan...';
                     } else if (data.status === 'authenticated') {
-                        infoContainer.textContent = 'You have been authenticated successfully!';
+                        qrContainer.innerHTML = ''; // Clear the QR code
+                        infoContainer.textContent = 'You have been authenticated!';
                     } else if (data.status === 'session_exists') {
                         infoContainer.textContent = 'Setting up session...';
                     } else if (data.status === 'auth_failure') {

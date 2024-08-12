@@ -4,8 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "sudo pm2 start server.js --ignore-watch='*.json'",
-        "dev": "sudo nodemon server.js --ignore '*.json'"
+        "start:pm2": "pm2 start server.js --name brasken-whatsapp-agent",
+        "delete:pm2": "pm2 delete brasken-whatsapp-agent",
+        "dev": "nodemon server.js --ignore '*.json'"
     },
     "keywords": [],
     "author": "",

@@ -5,10 +5,17 @@ const logger = require('./utils/logger.util');
 const MAX_RETRIES = 5;
 const RETRY_DELAY_MS = 2000; // 2 seconds
 
+let botClient;
+
 const initializeBot = async (retryCount = 0) => {
     try {
         logger('Attempting to initialize client...');
-        await initializeClient();
+
+        botClient = await initializeClient();
+
+        retryCount = 0;
+
+        return botClient;
     } catch (error) {
         logger(`Error initializing client: ${error}`);
 

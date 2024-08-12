@@ -8,7 +8,7 @@ const { readConfig } = require('../utils/update.config');
 const logger = require('../utils/logger.util');
 const { readDatabase } = require('../utils/database.config');
 
-const MONGODB_URL = process.env.MONGODB_URL;
+const CLIENT_ID = process.env.CLIENT_ID;
 const LOCAL_STORE = process.env.LOCAL_STORE;
 
 let dataPath = path.join(__dirname, '..', LOCAL_STORE);
@@ -20,8 +20,6 @@ let users = readDatabase();
 const initializeClient = () => {
     try {
         logger('Starting agent...');
-
-        const clientId = `brasken-agent`;
 
         const botClient = new Client({
             takeoverOnConflict: true,
@@ -40,7 +38,7 @@ const initializeClient = () => {
             },
             authStrategy: new LocalAuth({
                 dataPath,
-                clientId,
+                clientId: CLIENT_ID,
             }),
         });
 
@@ -164,6 +162,8 @@ const initializeClient = () => {
         });
 
         botClient.initialize();
+
+        return botClient;
     } catch (err) {
         logger(`Error initializing WhatsApp client: ${err}`);
     }
