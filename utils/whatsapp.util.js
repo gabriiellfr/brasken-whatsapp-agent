@@ -6,8 +6,6 @@ const { findUser } = require('./userUtils');
 const handleResponse = (message, chatId, client, states, users) => {
     const state = states[chatId] || 'START';
 
-    console.log(state);
-
     switch (state) {
         case 'START':
             states[chatId] = 'WAITING_FOR_OPTION';
@@ -28,7 +26,7 @@ const handleResponse = (message, chatId, client, states, users) => {
                 states[chatId] = 'SUPPORT';
                 client.sendMessage(
                     chatId,
-                    'Você selecionou "Falar com planejamento". Por favor aguarde, em instantes você seja atendido.',
+                    'Você selecionou "Falar com planejamento". Por favor aguarde, em instantes você será atendido.',
                 );
             } else {
                 client.sendMessage(
@@ -40,8 +38,6 @@ const handleResponse = (message, chatId, client, states, users) => {
 
         case 'WAITING_FOR_INFO':
             const formattedInfo = formatMessage(message.body);
-
-            console.log('data formatada', formattedInfo);
 
             const user = findUser(users, formattedInfo);
 
