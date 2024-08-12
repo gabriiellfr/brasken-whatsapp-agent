@@ -3,7 +3,7 @@ const path = require('path');
 
 const logFile = path.join(__dirname, '../logs', 'app.log');
 
-const log = (message) => {
+const logger = (message) => {
     console.log(message);
     const timestamp = new Date().toISOString();
     fs.appendFile(logFile, `${timestamp} - ${message}\n`, (err) => {
@@ -11,4 +11,4 @@ const log = (message) => {
     });
 };
 
-module.exports = log;
+module.exports = logger;

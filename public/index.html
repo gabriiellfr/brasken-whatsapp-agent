@@ -53,6 +53,8 @@
                         infoContainer.textContent = 'Waiting for QR code scan...';
                     } else if (data.status === 'authenticated') {
                         infoContainer.textContent = 'You have been authenticated successfully!';
+                    } else if (data.status === 'session_exists') {
+                        infoContainer.textContent = 'Setting up session...';
                     } else if (data.status === 'auth_failure') {
                         infoContainer.textContent = 'Authentication failed. Please try again.';
                     } else {

@@ -27,7 +27,7 @@ const sendToWebSocketClients = (message) => {
 
     const msg = JSON.stringify(message);
     wsServer.clients.forEach((client) => {
-        log(`WebSocket sending message to clients: ${message}`);
+        log(`WebSocket sending message to clients: ${JSON.stringify(message)}`);
 
         if (client.readyState === WebSocket.OPEN) client.send(msg);
     });
