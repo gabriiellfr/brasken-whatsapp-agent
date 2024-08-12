@@ -1,7 +1,6 @@
 @ -0,0 +1,10 @@
 
 /.wwebjs_auth
-/.wwebjs_auth
 .DS_Store
 .gitattributes
 /.wwebjs_cache
@@ -9,6 +8,8 @@
 /old
 package-lock.json
 /uploads
-db/brasken-db.json
+/db
 /local_store
-logs/app.log
+.env
+/logs
+config/settings.json

@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "pm2 start agent.js",
-        "dev": "nodemon agent.js"
+        "start": "sudo pm2 start server.js --ignore-watch='*.json'",
+        "dev": "sudo nodemon server.js --ignore '*.json'"
     },
     "keywords": [],
     "author": "",
@@ -13,6 +13,7 @@
     "dependencies": {
         "adm-zip": "^0.5.15",
         "archiver": "^7.0.1",
+        "dotenv": "^16.4.5",
         "express": "^4.19.2",
         "install": "^0.13.0",
         "mongoose": "^8.5.2",

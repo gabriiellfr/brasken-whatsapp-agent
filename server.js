@@ -2,9 +2,11 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 
+require('dotenv').config();
+
 const { initializeBot } = require('./whatsapp.agent');
 const { setupWebSocket } = require('./services/socket.service');
-const log = require('./utils/logger.util');
+const logger = require('./utils/logger.util');
 
 const apiRoutes = require('./routes/api.routes');
 
@@ -29,6 +31,5 @@ const server = http.createServer(app);
 setupWebSocket(server);
 
 server.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-    log(`Server running at http://localhost:${port}`);
+    logger(`Server running at http://localhost:${port}`);
 });
