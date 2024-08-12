@@ -2,9 +2,12 @@
 
 const formatMessage = require('./formatMessage');
 const { findUser } = require('./userUtils');
+const { readDatabase } = require('./database.config');
 
-const handleResponse = (message, chatId, client, states, users) => {
+const handleResponse = (message, chatId, client, states) => {
     const state = states[chatId] || 'START';
+
+    let users = readDatabase();
 
     switch (state) {
         case 'START':

@@ -6,7 +6,6 @@ const { sendToWebSocketClients } = require('./socket.service');
 const { handleResponse } = require('../utils/whatsapp.util');
 const { readConfig } = require('../utils/update.config');
 const logger = require('../utils/logger.util');
-const { readDatabase } = require('../utils/database.config');
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const LOCAL_STORE = process.env.LOCAL_STORE;
@@ -14,12 +13,11 @@ const LOCAL_STORE = process.env.LOCAL_STORE;
 let dataPath = path.join(__dirname, '..', LOCAL_STORE);
 let lastActiveTime = Math.floor(Date.now() / 1000);
 
-const states = [];
-let users = readDatabase();
-
 const initializeClient = () => {
     try {
         logger('Starting agent...');
+
+        var states = [];
 
         const botClient = new Client({
             takeoverOnConflict: true,
@@ -45,6 +43,9 @@ const initializeClient = () => {
         botClient.on('qr', (qr) => {
             try {
                 logger('QR Code received');
+
+                states = [];
+
                 qrcode.toDataURL(qr, (err, url) => {
                     if (err) {
                         logger(`Error generating QR code: ${err}`);
@@ -127,7 +128,7 @@ const initializeClient = () => {
 
                 const agentEnabled = readConfig().agentEnabled;
                 if (agentEnabled)
-                    handleResponse(message, chatId, botClient, states, users);
+                    handleResponse(message, chatId, botClient, states);
             } catch (err) {
                 logger(`Error handling message: ${err}`);
             }

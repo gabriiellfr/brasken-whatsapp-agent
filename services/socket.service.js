@@ -38,7 +38,10 @@ const sendToWebSocketClients = (message) => {
 const sendInitialStatus = (ws, botClient) => {
     ws.send(
         JSON.stringify({
-            status: botClient ? 'connected' : '',
+            status:
+                botClient && botClient.info && botClient.info.wid
+                    ? 'connected'
+                    : 'disconnected',
             agentEnabled: readConfig().agentEnabled,
         }),
     );
